@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>index.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Start</a>
+</li>
+<li>
+  <a href="access_analysis.html">Analysis</a>
+</li>
+<li>
+  <a href="access_map.html">Map</a>
+</li>
+<li>
+  <a href="access_recommendations.html">Recommendations</a>
+</li>
+<li>
+  <a href="data_code.html">Data &amp; Code</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-10">
+
+<div id="parkrun-who-has-access-and-who-participates---analysis-and-policy-recommendations" class="section level3">
+<h3><strong>Parkrun: Who has access, and who participates? - Analysis and policy recommendations</strong></h3>
+<p>Schneider PP<sup>1</sup>, Smith R<sup>1</sup>, Brennan A<sup>1</sup>, Haake S<sup>2</sup>, Goyder E<sup>1</sup></p>
+<p><small> <sup>1</sup> School of Health and Related Research, University of Sheffield, Sheffield, UK <sup>2</sup> Advanced Wellbeing Research Centre, Sheffield Hallam University, SheffieldS, UK </small></p>
+<p><br></p>
+<p>Contact: <a href="mailto:p.schneider@sheffield.ac.uk">p.schneider@sheffield.ac.uk</a></p>
+<hr />
+<div id="motivation" class="section level4">
+<h4>Motivation</h4>
+<p>Lack of physical activity is a leading cause of disease and disability. “Sedentary lifestyles increase all causes of mortality, double the risk of cardiovascular diseases, diabetes, and obesity, and increase the risks of colon cancer, high blood pressure, osteoporosis, lipid disorders, depression and anxiety”<span class="citation">[@WHO]</span>. Promoting physical activity is therefore a key target for public health. For the UK, it has been estimated that “one in six deaths” is attributable physical inactivity. Increasing the level of PA of the population is therefore considered a key priority for public health.</p>
+<p><br></p>
+<p>However, interventions aimed an encouraging people to be more active are reported to have adverse consequences with regards to health inequalities: health promotion activities are often taken up by those who are healthier anyway, and socio-economically deprived groups and other disadvantaged populations are frequently underrepresented. Moreover, evidence suggests that populations from a low socio-economic background may achieve poorer behaviour change outcomes following interventions compared with more affluent participants, resulting in poorer health outcomes“.<span class="citation">[@https://bmjopen.bmj.com/content/4/11/e006046]</span> Interventions to increase the levels of physcial activity could thereby contribute to the already stark inequalities in health in the UK.</p>
+<p><br></p>
+<p>Previous studies suggest that, parkrun<span class="citation">[@http://www.parkrun.org.uk/]</span>, a grass-root running movement might offer some valuable lessons in this regard.[13] A study by Stevinson et al.[14] indicated that parkrun is particularly successful in encouraging participation in groups that are often underrepresented in health promotion activities. Accessibility and inclusivity of events were reported by participants to have contributed to their initial attendance and sustained involvement.[15]</p>
+<br> <!-- blue text box -->
+<div class="alert alert-info">
+<p><strong>What is Parkrun?</strong></p>
+Parkrun hosts five-kilometre running events in public parks on Saturday mornings. The events are organized by volunteers and participation is free. As of October 2018, there were 570 parkrun locations in the UK, and 1.8 million registered runners. For more info, see <a href="https://en.wikipedia.org/wiki/Parkrun">Wikipedia</a>
+</div>
+<p><br></p>
+</div>
+<div id="research-question" class="section level4">
+<h4>Research question</h4>
+<p>This study aims to study three closely related questions: Who has access to parkrun events in England? Who participates? And what should we do next?</p>
+<ol style="list-style-type: decimal">
+<li><p>We look at the relationship between the deprivation of an area and its geographic distance to the nearest parkrun event, to assess whether people in more deprived areas have a longer distance to travel to attend an event.</p></li>
+<li><p><mark><em>– Depending on data availability –</em></mark> we will analyse participant data from parkrun events from 2018 to see from which areas the participants of parkrun events actually came: Are people from more deprived areas underrepreented? Do people from more affluent areas travel longer distances to attend running events?</p></li>
+<li><p>We consider what we have learned from questions one and two, and make recommendations for candidate locations for starting new parkrun events, with the aim to either maximize access, or maximize utilization.</p></li>
+</ol>
+<p><br></p>
+<hr />
+<center>
+<a href="access_analysis.html">CONTINUE TO THE <strong>ANALYSIS</strong></a>
+</center>
+<hr />
+<p><br></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
