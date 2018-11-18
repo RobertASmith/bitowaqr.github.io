@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>access_analysis.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Start</a>
+</li>
+<li>
+  <a href="access_analysis.html">Analysis</a>
+</li>
+<li>
+  <a href="access_map.html">Map</a>
+</li>
+<li>
+  <a href="access_recommendations.html">Recommendations</a>
+</li>
+<li>
+  <a href="data_code.html">Data &amp; Code</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-10">
+
+
+<p><br></p>
+<div id="who-has-access-to-parkrun-events-in-england" class="section level4">
+<h4>Who has access to parkrun events in England?</h4>
+<p><br></p>
+<p>We analysed data of 32844 LSOA and 451 parkrun events in England. For each LSOA, we determined its distance to the nearest parkrun event. To be clear, for this analysis, we measured <em>access</em> as the (orthodromic) distance between the centroid of an LSOA area and the parkrun course that was closest to it. We did not consider the distances people actually travelled, which might be very different from</p>
+<p>Figure 1 shows the distribution of distances from LSOAs to the their nearest parkrun event. The median distance between LSOA centroids and a parkrun event was around 3.5 km (2.2 miles), but the distribution was heavily skewed, with a few outlier LSOA having distances over 40 km (25 miles) (maximum = 75 km (47 miles)).</p>
+<div class="figure">
+<img src="access_analysis_files/figure-html/hist_dist-1.png" alt="Figure 1: Access to parkrun events (15 outliers excluded)" width="672" />
+<p class="caption">
+Figure 1: Access to parkrun events (15 outliers excluded)
+</p>
+</div>
+<br> <!-- blue text box -->
+<div class="alert alert-info">
+<strong>What is a LSOA?</strong><br />
+A Lower Layer Super Output Area (LSOA) is a geographic area, which combines 4-6 ‘output areas’ which, in turn, combine several postcode areas. LSOA have been automatically generated to have consistent population sizes of around 1,000. In our data set, the mean population per LSOA was 1668 with a standard deviation of 365. Consequently, the actual geographic size of LSOA varis a lot, depending on the population density. For more info, see <a href="https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeography">Office for National Statisics website</a>
+</div>
+<hr />
+<p><br></p>
+<p>Figure 2 shows that the vast majority (Y%) of LSOA have a parkrun event within 5 km (X miles), and about 90% of areas (i.e. approximately 90% of the English population), has a parkrun event within 10 km ( X miles). However, this also means that around 10% of the population live in areas that is far away. It shpould be noted that the geographic distance is the shortest distance between two points. The actual distances people have to travel might, of course, vary considerably.</p>
+<div class="figure">
+<img src="access_analysis_files/figure-html/cum_dist-1.png" alt="Figure 2: Cumulative distribution of distances to the nearest parkrun event (49 outliers omitted)" width="480" />
+<p class="caption">
+Figure 2: Cumulative distribution of distances to the nearest parkrun event (49 outliers omitted)
+</p>
+</div>
+<hr />
+<p><br></p>
+<p>Served population per event:</p>
+<p>On average, a parkrun event serves 73 LSOAs (SD=45), and 121,477 people (SD= 75,853) . There are again some extreme outliers. <a href="http://www.parkrun.org.uk/cannon-hill/course/">Canon Hill</a>, for example, a park in the south of Birmingham, hosts events that are nearest to 351 LSOAs and 6.126e+05 people.</p>
+<div class="figure">
+<img src="access_analysis_files/figure-html/event_pop-1.png" alt="Figure 3: Total population for which a particulat parkrun event is the nearest" width="480" />
+<p class="caption">
+Figure 3: Total population for which a particulat parkrun event is the nearest
+</p>
+</div>
+<hr />
+<p><br></p>
+<p>Figure 4 shows the relationship between the deprivation scores and distances to the nearest parkurn event. Each point represent one LSOA, i.e. approsimately 1,000 people. It seems, there is very little correlation and, if any, then a negative one. That means, more deprived areas have, in fact, shorter distances to parkrun events.</p>
+<div class="figure">
+<img src="access_analysis_files/figure-html/dist_depri-1.png" alt="Figure 4: Association between deprivation and access to parkrun (22 outliers omitted)" width="768" />
+<p class="caption">
+Figure 4: Association between deprivation and access to parkrun (22 outliers omitted)
+</p>
+</div>
+<hr />
+<p><br></p>
+<p>The (most probably) underlying explanation is that deprived areas are mostly located in urban areas with high population densities (left figure below). Similarly, parkrun events also tend to cluster around cities (right figure below).</p>
+<div class="figure">
+<img src="access_analysis_files/figure-html/dist_density_density_depri-1.png" alt="Figure 5: Associations between deprivation and population density, and between population density and distance to the nearest parkrun event" width="1152" />
+<p class="caption">
+Figure 5: Associations between deprivation and population density, and between population density and distance to the nearest parkrun event
+</p>
+</div>
+<hr />
+<p><br></p>
+<p>Interestingly, if we take interaction between density and deprivation into account, the effect on deprivation differs between rural and urban areas: We plotted predicted values for populations living in the 10% least densly, 10% high dense, and 50% (median) dense areas (see figure 5). The results seem to suggest that dperived people in rural areas seem to have better access to parkrun events than people frmo less deprived areas. In medium densely populated areas, this effects is much less prominent, and in high density areas, the effect seem to reverse, and a slight positive effect could be observed. However, it should be noted that the observed effects were small and that the adding the deprivaiton score into the model did barely improve the model fit (see table 1 below).</p>
+<div class="figure">
+<img src="access_analysis_files/figure-html/model_preds-1.png" alt="Figure 6: Association between deprivation and distance to the nearest parkrun event for different levels of population density - See Model 3 below" width="576" />
+<p class="caption">
+Figure 6: Association between deprivation and distance to the nearest parkrun event for different levels of population density - See Model 3 below
+</p>
+</div>
+<p><br></p>
+<strong>Regression models</strong>
+<table class="mtable" style="border-collapse: collapse; border-style: none; margin: 2ex auto;">
+<tr style="border-style: none;">
+<td colspan="1" style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; border-top: 1px solid;">
+</td>
+<td colspan="3" style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; border-top: 1px solid;">
+Model 1
+</td>
+<td colspan="3" style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; border-top: 1px solid;">
+Model 2
+</td>
+<td colspan="3" style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; border-top: 1px solid;">
+Model 3
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; border-top: 1px solid;">
+(Intercept)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-top: 1px solid;">
+5
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-top: 1px solid;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-top: 1px solid;">
+611<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-top: 1px solid;">
+4
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-top: 1px solid;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-top: 1px solid;">
+724<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-top: 1px solid;">
+4
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-top: 1px solid;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-top: 1px solid;">
+591<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(142
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+258)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(240
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+753)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(121
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+775)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+Deprivation Score
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+041<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+008<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−27
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+728)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(5
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+117)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+poly(log(Population density), 4)1
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−398
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+979<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−321
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+202<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−112
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+205)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−35
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+157)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+poly(log(Population density), 4)2
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+67
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+245<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−32
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+358<span class="signif.symbol">**</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(18
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+911)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−3
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+256)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+poly(log(Population density), 4)3
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−70
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+507<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−24
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+296<span class="signif.symbol">*</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−19
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+829)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−2
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+449)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+poly(log(Population density), 4)4
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+46
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+127<span class="signif.symbol">***</span>
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+31
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+541<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(12
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+972)
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(3
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+336)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+Deprivation Score x poly(log(Population density), 4)1
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−5
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+053<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−10
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+227)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+Deprivation Score x poly(log(Population density), 4)2
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+5
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+553<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(11
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+700)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+Deprivation Score x poly(log(Population density), 4)3
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+−2
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+412<span class="signif.symbol">***</span>
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(−4
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+945)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+Deprivation Score x poly(log(Population density), 4)4
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+162
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em;">
+(0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em;">
+388)
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; border-top: 1px solid;">
+R-squared
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-top: 1px solid;">
+0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-top: 1px solid;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-top: 1px solid;">
+023
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-top: 1px solid;">
+0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-top: 1px solid;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-top: 1px solid;">
+291
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-top: 1px solid;">
+0
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-top: 1px solid;">
+.
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-top: 1px solid;">
+295
+</td>
+</tr>
+<tr style="border-style: none;">
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.3em; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; border-bottom: 1px solid;">
+N
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-bottom: 1px solid;">
+32844
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-bottom: 1px solid;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-bottom: 1px solid;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-bottom: 1px solid;">
+32844
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-bottom: 1px solid;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-bottom: 1px solid;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: right; margin-right: 0px; padding-right: 0px; padding-left: 0.3em; border-bottom: 1px solid;">
+32844
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: center; margin-left: 0px; margin-right: 0px; padding-right: 0px; padding-left: 0px; width: 1px; border-bottom: 1px solid;">
+</td>
+<td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5ex; padding-right: 0.5ex; margin-top: 0px; margin-bottom: 0px; border-style: none; border-width: 0px; text-align: left; margin-left: 0px; padding-left: 0px; padding-right: 0.3em; border-bottom: 1px solid;">
+</td>
+</tr>
+</table>
+<hr />
+<p><br></p>
+</div>
+<div id="conclusion" class="section level4">
+<h4>Conclusion</h4>
+<p>Contrary to our initial expectations, we found that people living in deprived areas have better access to parkrun events than people living in affluent areas. This effects appears to be the result of the aggregation of deprived areas within urban areas, which seem to also attract parkrun events.</p>
+<p>The clustering of parkrun events around cities seem to cause a strong rural-urban gradient: People in rural areas have much farther distances to parkrun events than people living in urban areas. This is particularly unfortunate, since people in rural areas tend to have lower PA that people living in cities - Exactly the group of people who would most benefit from participating in weekly running events!</p>
+<p><br></p>
+<hr />
+<center>
+<a href="access_map.html">EXPLORE THE <strong>MAP</strong></a>
+</center>
+<hr />
+<p>This website aims to provide a quick and informal overview of the findings. If you want to have a closer look at the methodology behind our analysis, the source code is available, see: <a href="dc.html">data&amp;code</a>.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
