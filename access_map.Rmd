@@ -1,0 +1,144 @@
+---
+output: 
+  html_document:
+    code_folding: hide
+---
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-10">
+
+<br>
+
+#### Who has access to parkrun events?
+
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+```{r map_discover, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=7, fig.width=10}
+source("./src/geo_functions.R")
+install_n_load(c("leaflet","sp","raster","rgeos","geosphere"))
+poly_df = raster::shapefile("./input/polygons")
+parkrun_marker = raster::shapefile("./input/marker_england")
+parkrun_marker = get_event_res(event = parkrun_marker,
+                               poly_pop = poly_df,
+                               pop_n = poly_df$pop,
+                               objective = "dist^2 *pop")
+
+q_dists = as.numeric(quantile(poly_df$mn_dstn,probs = c(seq(0,1,by=0.1))))
+pal_dist <- colorBin("RdYlGn", domain = poly_df$mn_dstn, bins = q_dists,reverse =T)
+
+q_pp_dnst = as.numeric(quantile(poly_df$pp_dnst,probs = c(seq(0,1,by=0.1))))
+pal_dens <- colorBin("RdYlGn", domain = poly_df$pp_dnst, bins = q_pp_dnst,reverse =T)
+
+q_depr = as.numeric(quantile(poly_df$a,probs = c(seq(0,1,by=0.1))))
+pal_depr <- colorBin("RdYlGn", domain = poly_df$a, bins = q_depr,reverse =T)
+
+map_discover = 
+      leaflet() %>%
+      # addTiles(group = "OSM Map") %>%
+      addProviderTiles("CartoDB.Positron",group= "Carto Map", 
+                       options= providerTileOptions(opacity = 0.99)
+      ) %>%
+      # # DISTANCES POLYGONS
+      addPolygons(data = poly_df, group = "Distances",
+                  color = "gray", smoothFactor = 1,stroke = T,opacity = 0.5,
+                  weight = 0.1, fillOpacity = 0.5,fillColor = ~pal_dist(mn_dstn),
+                  highlight = highlightOptions(
+                    weight = 1,color = "cyan",opacity = 1,bringToFront = FALSE,sendToBack = TRUE),
+                  popup = paste(
+                    poly_df$name,"<br>",
+                    "Nearest event:", poly_df$nrst_vn,"<br>",
+                    "Distance: ",poly_df$mn_dstn," km <br>",
+                    "Density: ",poly_df$pp_dnst," <br>",
+                    "IMD score:", poly_df$a,"<br>",
+                    "Population:", poly_df$pop)
+      ) %>%
+      # # add distance legend
+      addLegend(group = "Distances",
+                position = "bottomright", 
+                pal = pal_dist, values = poly_df$mn_dstn,
+                opacity = 0.7, title="Distance deciles",
+                labFormat = labelFormat(suffix  = "km") 
+      ) %>%
+  # # DISTANCES POLYGONS
+      addPolygons(data = poly_df, group = "Density",
+                  color = "gray", smoothFactor = 1,stroke = T,opacity = 0.5,
+                  weight = 0.1, fillOpacity = 0.5,fillColor = ~pal_dens(pp_dnst),
+                  highlight = highlightOptions(
+                    weight = 1,color = "cyan",opacity = 1,bringToFront = FALSE,sendToBack = TRUE),
+                  popup = paste(
+                    poly_df$name,"<br>",
+                    "Nearest event:", poly_df$nrst_vn,"<br>",
+                    "Distance: ",poly_df$mn_dstn," km <br>",
+                    "Density: ",poly_df$pp_dnst," <br>",
+                    "IMD score:", poly_df$a,"<br>",
+                    "Population:", poly_df$pop)
+      ) %>%
+      # # add distance legend
+      addLegend(group = "Density",
+                position = "bottomright", 
+                pal = pal_dens, values = round(poly_df$pp_dnst),
+                opacity = 0.7, title="Density deciles" 
+      ) %>%
+    # # DISTANCES POLYGONS
+      addPolygons(data = poly_df, group = "Deprivation",
+                  color = "gray", smoothFactor = 1,stroke = T,opacity = 0.5,
+                  weight = 0.1, fillOpacity = 0.5,fillColor = ~pal_depr(a),
+                  highlight = highlightOptions(
+                    weight = 1,color = "cyan",opacity = 1,bringToFront = FALSE,sendToBack = TRUE),
+                  popup = paste(
+                    poly_df$name,"<br>",
+                    "Nearest event:", poly_df$nrst_vn,"<br>",
+                    "Distance: ",poly_df$mn_dstn," km <br>",
+                    "Density: ",poly_df$pp_dnst," <br>",
+                    "IMD score:", poly_df$a,"<br>",
+                    "Population:", poly_df$pop)
+      ) %>%
+      # # add distance legend
+      addLegend(group = "Deprivation",
+                position = "bottomright", 
+                pal = pal_depr, values = poly_df$a,
+                opacity = 0.7, title="Deprivation deciles" 
+      ) %>%
+      # # ESTABLISHED EVENTS
+      addCircleMarkers(
+        group = "Parkrun events",
+        data = parkrun_marker,
+        lng = ~lon,lat = ~lat,
+        radius = 5,fillColor = "blue",
+        stroke = FALSE, fillOpacity = 0.9,
+        popup = paste("Course:",parkrun_marker$Club,"<br>",
+                      "Established:", parkrun_marker$Estblsh,"<br>",
+                      "Served pop:", round(parkrun_marker$srvd_pop),"<br>",
+                      "Served LSOA:", round(parkrun_marker$srvd_lsoa),"<br>",
+                      "Mean distance:", round(parkrun_marker$mean_dist/1000,1),"km <br>",
+                      # "Objective:", parkrun_marker$objective,"<br>",
+                      "Mean participants:", round(parkrun_marker$Mn_prtc),"<br>",
+                      "Mean volunteers:", round(parkrun_marker$Mn_vlnt))
+      ) %>%
+      # # LAYER CONTROL
+      addLayersControl(
+        overlayGroups = c(
+          "Parkrun events",
+          "Distances",
+          "Deprivation",
+          "Density"),
+        options = layersControlOptions(collapsed = F,autoZIndex=T)
+      ) %>% 
+      setView(lng = -1.43, lat = 53.36, zoom = 7
+      ) %>%
+      # # hide all layers except parkrun events
+      hideGroup("Distances") %>%
+      hideGroup("Density") %>%
+      hideGroup("Deprivation")
+    
+map_discover
+```
+
+
+
+****
+  
+<center> [CONTINUE TO **RECOMMENDATIONS**](access_recommendations.html) </center>
+
+****

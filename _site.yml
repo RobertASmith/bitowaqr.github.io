@@ -1,0 +1,21 @@
+name: "Parkrun research @ TUoS"
+output_dir: .
+navbar:
+  left:
+    - text: "Start"
+      href: index.html
+<<<<<<< HEAD
+    - text: "Analysis"
+      href: access_analysis.html
+    - text: "Map"
+      href: access_map.html
+    - text: "Recommendations"
+      href: access_recommendations.html
+=======
+    - text: "Access - Recommendations"
+      href: mrkdwn_access_recommendations.html
+>>>>>>> parent of e998175... analysis html created
+    - text: "Data & Code"
+      href: data_code.html
+
+#   rmarkdown::render_site()

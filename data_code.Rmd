@@ -1,0 +1,44 @@
+---
+output: html_document
+---
+
+<style type="text/css">
+.title {
+  display: none;
+}
+
+#getting-started img {
+  margin-right: 10px;
+}
+
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-10">
+
+#### Data, code & disclaimer
+
+  The data and the source code that were used to generate the this website, including all figures and maps, are openly available.
+
+__R source code for maps, figures, and website:__   
+  https://github.com/bitowaqr/bitowaqr.github.io 
+
+__Parkrun event info:__   
+  Parkrun UK. 2018. http://www.parkrun.org.uk/
+
+__Deprivation scores (not yet visibke):__   
+  Office for National Statistics. English indices of deprivation 2015. Official Statistics. 2015. [Available online](https://www.gov.uk/government/statistics/english-indices-of-deprivation-2015) 
+
+__Population size and density per LSOA:__   
+  Office for National Statistics. Lower layer Super Output Area population density (National Statistics). Mid-2015: SAPE20DT11: Revised. 2018. [Available online](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareapopulationdensity) 
+
+__LSOA geospatial info:__   
+  Office for National Statistics. Lower Layer Super Output Area (LSOA) boundaries. Super generalized and clipped. 2016. [Available online](https://borders.ukdataservice.ac.uk/easy_download_data.html?data=England_lsoa_2011)
+
+__Greenspaces and parks:__    
+  Ordnance Survey. OS Open Greenspace. 2018. [Available online](https://www.ordnancesurvey.co.uk/opendatadownload/products.html#OPGRSP)	
+
+
+
+
+
