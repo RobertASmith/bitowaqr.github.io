@@ -3,6 +3,7 @@ output:
   html_document:
     code_folding: hide
 ---
+
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-10">
 
@@ -11,19 +12,55 @@ source("./src/src_access_recommendations.R")
 ```
 
 
-#### Recommending candidate parks for new events
+#### Where to start the next parkrun event?
 
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  The map below provides some suggestions on where new parkrun events should be started, in order to maximize (potential) public access. Select from the menu: 
+  
+  * `New candidates (first)`: Top 50 candidate parks to consider, if *a single new parkrun event* is to be started. 
+  * `New candidates (consecutive)`: Candidate parks for starting *25 consecutive events*, taking into account the effects new events have on the effectiveness of subsequent events. 
+  * `Candidate parks`: Shows all 2,827 parks that were considered.
+  * Recommendations are ranked by impact, and the sizes of the circles indicate the realtive impact on the overall objective function.
+  
+  <br><br>
+  
+  
+<!-- blue text box -->
+<div class="alert alert-info"> <strong>The objective function</strong> 
 
-
+  $$ \min \limits_{c\ \in \ C } ( \sum_{i=1}^{32,844}{\min (f( \ l_i; \ E \cup  c)^2 \ )} * w_i )$$
+  <small>
+  The objective was to minimize the total population-weighted impedance. Distance $d$ was assumed to have impedance $d^2$ (access was assumed to be the inverse squared distance, in accordance with a classic gravity model. The set of established parkrun events was denoted as $\ E = \{e_1 ,...,e_{451}\}$, the set of candidate parks as $\ C = \{c_1 ,...,c_{2827}\}$, the total population living in LSOA $l_i$ as $w_i$, and the distance from LSOA $l_i$ to the nearest parkrun event as $min(f(l_i; E))$. More details are provided below.
+  
+  </small>
+</div>
+  
 
 <br>
 
-```{r map2, echo=FALSE, fig.height=7, fig.width=10, message=FALSE, warning=FALSE}
+```{r map2, echo=FALSE, fig.height=6.5, fig.width=10, message=FALSE, warning=FALSE}
 map_distance_squared
 ```
 
+<br>
 
+#### Methods 
+
+  We used a locational allocation analysis to find the optimal site for starting a new parkrun event, in order to minimize population-weighted total impedance (see objective function above). Impedance was assumed to increase quadratically with distance (i.e. overall access could in turn be seen as the inverse squared distance). The search space was restricted to public parks, with an area of 0.05 km$^2$ or more, that were registered in the OS Open Greenspace database (see [see data & code](data_code.html)). For each candidate park, we evaluated the impact of starting a new event on total impedance. To assess cumulative effects, we repeated the analysis, each time adding the optimal candidate park to the list of established parkrun sites.
+  
+  Put simply, our model consisted of a loop with four steps: 1. we added a candidate park to the list of parkrun events. 2. for each LSOA, we then determined the distance to the nearest parkrun event (including the candidate park). 3. we evaluated the change in the sum of population-weighted squared distances over all LSOA. 4. the optimal site for a new parkrun event was then the candidate park with the lowest sum.
+  
+  We did not consider information about actual travel distances or utilisation. Rather, it was based on two  major assumptions: First, potential access only depended on the distance to the *nearest* parkrun event and distances to all other events were not considered. The supply capacity was further assumed to be unlimited (there are no restriciton on how many people can attend events). Second, impedance was modeled to increase quadratically, i.e. access was assumed to have an inverse square distance decay. Consquentlly, a reduction from, say, 5 to 4 km (25-16=9) led to a greater improvement improvement in the overall impedance than a reduction from 3 to 2km (9-4=5).
+  
+  <br><br>
+  
+#### Sensitivity analysis
+  
+   We also assessed a model with linear access decay (i.e. impedance = distance) with  a simple minimum distance model (i.e. a model without inverse squared distance decay). IN this model, candidate parks were affected less by long distances, and -relstively- more by population sizes. Consequently, they were more often located within urban areas with high population sizes. Most notably,  one event was recommended in the centre of London (at the X park), and three other parks were selected in Birmigham. 
+   
+   To check whether results were dependend on the (un)availability of parks in certain regions, we ran an analysis with the centroids of all LSOA as potential sites for parkrun events. The resulting spatial patterns of recommendations (and their ranks) were similar to the main analysis. 
+ 
+ 
+ 
 ****
   
 <center> [See **data & code**](data_code.html) </center>

@@ -10,11 +10,19 @@ output:
 
 #### Who has access to parkrun events?
 
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  The interactive map below contains multiple layers of information for 451 parkun events and more than 32,000 LSOA - Please allow some time to load and render.
 
+  * Move around and zoom to explore the map.
+  * Blue points indicate parkrun events.
+  * Select LSOA-layers from the menu in the upper-right corner.
+    - Distance to the nearest parkrun event
+    - Index of multiple deprivation
+    - Population density
+  * Click on events or LSOAs for additional information.
+  
+  <br>
 
-
-```{r map_discover, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=7, fig.width=10}
+```{r map_discover, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=6.5, fig.width=10}
 source("./src/geo_functions.R")
 install_n_load(c("leaflet","sp","raster","rgeos","geosphere"))
 poly_df = raster::shapefile("./input/polygons")

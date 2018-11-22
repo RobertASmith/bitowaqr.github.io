@@ -19,7 +19,7 @@ options(scipen=9999)
   
 <br>
 
-  We analysed data of `r dim(poly_df@data)[1]` LSOA and `r length(parkrun_marker@data[,1])` parkrun events in England. For each LSOA, we determined its distance to the nearest parkrun event. To be clear, for this analysis, we measured *access* as the (orthodromic) distance between the centroid of an LSOA area and the parkrun course that was closest to it. We did not consider the distances people actually travelled, which might be very different from
+  We analysed data of `r dim(poly_df@data)[1]` LSOA in England. For each LSOA, we determined its distance to the nearest parkrun event. To be clear, for this analysis, we measured *access* as the (orthodromic) distance between the centroid of an LSOA area and the parkrun course that was closest to it. We did not consider the distances people actually travelled, which might be very different from
   
   Figure 1 shows the distribution of distances from LSOAs to the their nearest parkrun event. The median distance between LSOA centroids and a parkrun event was around 3.5 km (2.2 miles), but the distribution was heavily skewed, with a few outlier LSOA having distances over 40 km (25 miles) (maximum = 75 km (47 miles)).
   
@@ -46,8 +46,7 @@ cumsum_dist_per_lsoa
 <br>
 
 Served population per event:
-
-On average, a parkrun event serves `r round(mean(parkrun_marker$srvd_lsoa))` LSOAs (SD=`r round(sd(parkrun_marker$srvd_lsoa))`), and  `r formatC(round(mean(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)` people  (SD=`r formatC(round(sd(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)`) . There are again some extreme outliers. [Canon Hill](http://www.parkrun.org.uk/cannon-hill/course/), for example, a park in the south of Birmingham, hosts events that are nearest to `r parkrun_marker@data[74,"srvd_lsoa"]` LSOAs and `r formatC(parkrun_marker@data[74,"srvd_pop"], big.mark=",")` people. 
+There are currently `r length(parkrun_marker@data[,1])` parkrun sites in England. On average, a parkrun event serves `r round(mean(parkrun_marker$srvd_lsoa))` LSOAs (SD=`r round(sd(parkrun_marker$srvd_lsoa))`), and  `r formatC(round(mean(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)` people  (SD=`r formatC(round(sd(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)`). There are again some extreme outliers. [Canon Hill](http://www.parkrun.org.uk/cannon-hill/course/), for example, a park in the south of Birmingham, hosts events that are nearest to `r parkrun_marker@data[74,"srvd_lsoa"]` LSOAs and `r formatC(parkrun_marker@data[74,"srvd_pop"], big.mark=",")` people. 
 
 ```{r event_pop, echo=FALSE, fig.height=3, fig.width=5, message=FALSE, warning=FALSE, fig.cap="Figure 3: Total population for which a particulat parkrun event is the nearest"}
 hist_srvd_pop_per_event
