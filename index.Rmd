@@ -9,7 +9,7 @@ output: html_document
   Schneider PP^1^, Smith R^1^, Brennan A^1^, Haake S^2^, Goyder E^1^
 
 <small>
-  ^1^ School of Health and Related Research, University of Sheffield, Sheffield, UK 
+  ^1^ School of Health and Related Research, University of Sheffield, Sheffield, UK   
   ^2^ Advanced Wellbeing Research Centre, Sheffield Hallam University, SheffieldS, UK
 </small>
 
@@ -21,15 +21,12 @@ output: html_document
 
 #### Motivation
 
-  Lack of physical activity is a leading cause of disease and disability. Sedentary lifestyles increase all causes of mortality, double the risk of cardiovascular diseases, diabetes, and obesity, and increase the risks of colon cancer, high blood pressure, osteoporosis, lipid disorders, depression and anxiety[@WHO]. Promoting physical activity is therefore a key target for public health. For the UK, it has been estimated that "one in six deaths" is attributable physical inactivity. Increasing the level of PA of the population is therefore considered a key priority for public health.
-  
-  <br>
+  Lack of physical activity is a leading cause of disease and disability. For the UK, it has been estimated that "one in six deaths" is attributtable to physical inactivity. Increasing the level of physical activity of the population is therefore considered a key priority for public health.
 
-  However, interventions aimed an encouraging people to be more active are reported to have adverse consequences with regards to health inequalities: health promotion activities are often taken up by those who are healthier anyway, and socio-economically deprived groups and other disadvantaged populations are frequently underrepresented. Moreover, evidence suggests that populations from a low socio-economic background may achieve poorer behaviour change outcomes following interventions compared with more affluent participants, resulting in poorer health outcomes.[@https://bmjopen.bmj.com/content/4/11/e006046] Interventions to increase the levels of physcial activity could thereby contribute to the already stark inequalities in health in the UK.
+  However, interventions to promote physical activity can have unintended consequences: health promotion activities are often taken up by those who are healthier anyway, and socio-economically deprived groups and other disadvantaged populations are frequently underrepresented. Evidence further suggests that populations from low socio-economic backgrounds may achieve poorer behaviour change and health outcomes following interventions. If not carfully designed, interventions to increase the levels of physcial activity could worsen the already stark health inequalities in the UK.
   
-  <br>
-
-  Previous studies suggest that, parkrun[@http://www.parkrun.org.uk/], a grass-root running movement might offer some valuable lessons in this regard.[@13] A study by Stevinson et al.[@14] indicated that parkrun is particularly successful in encouraging participation in groups that are often underrepresented in health promotion activities. Accessibility and inclusivity of events were reported by participants to have contributed to their initial attendance and sustained involvement.[@15]
+  Previous studies suggest that, [parkrun](http://www.parkrun.org.uk/), a grass-root running movement might offer some valuable lessons in this regard. parkrun seems to be particularly successful in encouraging participation in groups that are often underrepresented in health promotion activities ([Stevenson et al., 2014](https://academic.oup.com/jpubhealth/article/36/2/268/1548895)). In fact, parkrun participants report that accessibility and inclusivity are among the main factors that contributed to their initial attendance and sustained involvement ([Stevinson et al., 2017](https://onlinelibrary.wiley.com/doi/full/10.1111/1467-9566.12622))
+  
 
 <br>
 <!-- blue text box -->
@@ -41,13 +38,14 @@ output: html_document
   
 #### Research question
   
-  This study aims to study three closely related questions: Who has access to parkrun events in England? Who participates? And what should we do next?
+  This study aims to investigate the (potential) geographic access to parkrun events and the actual utilization. Based on our findings, we provide policy recommendation for increasing both. More specifically, we assessed:
   
-  1. We look at the relationship between the deprivation of an area and its geographic distance to the nearest parkrun event, to assess whether people in more deprived areas need to travel longer distances to participate. 
+    
+  1. Who has access to parkrun events in England? We look at the relationship between the deprivation of an area and its geographic distance to the nearest parkrun event, to assess whether people in more deprived areas need to travel longer distances to participate. 
   
-  2. <mark>*-- Depending on data availability --*</mark> we will analyse participant data from parkrun events from 2018 to see from which areas the participants of parkrun events actually came: Are people from more deprived areas underrepreented? Do people from more affluent areas travel longer distances to attend running events? 
+  2. Who participates in parkrun events? <mark>*-- Depending on data availability --*</mark> we will analyse participant data from parkrun events from 2018 to see from which areas the participants of parkrun events actually came: Are people from more deprived areas underrepreented? Do people from more affluent areas travel longer distances to attend running events? 
   
-  3. We consider what we have learned from questions one and two, and make recommendations for candidate locations for starting new parkrun events, with the aim to either maximize access, or maximize utilization.
+  3. We consider what we have learned from questions one and two and recommend locations for for starting new parkrun events, in order to either maximize geographic public access, or maximize utilization.
 
   <br>
 
