@@ -18,6 +18,10 @@ options(scipen=9999)
 #### Who has access to parkrun events in England?
   
   <br>
+  
+  <center><b><font size="6" color="#0099ff"> - Work in Progress - </font> </b></center>
+
+  <br>
 
   We analysed data of `r dim(poly_df@data)[1]` LSOA in England. For each LSOA, we determined its distance to the nearest parkrun event. To be clear, for this analysis, we measured *access* as the (orthodromic) distance between the centroid of an LSOA area and the parkrun course that was closest to it. We did not consider the distances people actually travelled, which might, of course, be very different.
   

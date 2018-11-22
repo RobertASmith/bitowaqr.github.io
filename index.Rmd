@@ -13,39 +13,41 @@ output: html_document
   ^2^ Advanced Wellbeing Research Centre, Sheffield Hallam University, SheffieldS, UK
 </small>
 
-<br>
-
   Contact: p.schneider@sheffield.ac.uk
 
 ****
 
+<center><b><font size="6" color="#0099ff"> - Work in Progress - </font> </b></center>
+<br>
+
 #### Motivation
 
-  Lack of physical activity is a leading cause of disease and disability. For the UK, it has been estimated that "one in six deaths" is attributtable to physical inactivity. Increasing the level of physical activity of the population is therefore considered a key priority for public health.
+  Insufficient physical activity is one of the leading causes of disease and disability worldwide ([WHO, 2018](http://www.who.int/news-room/fact-sheets/detail/physical-activity)). For the UK, it has been estimated that one in six deaths is attributable to insufficient physical activity ([Lee et al. 2012](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3645500/)). Increasing the physical activity levels of the UK population has the potential to improve quality of life, reduce mortality rates and alleviate the strain on health and social care services. 
 
-  However, interventions to promote physical activity can have unintended consequences: health promotion activities are often taken up by those who are healthier anyway, and socio-economically deprived groups and other disadvantaged populations are frequently underrepresented. Evidence further suggests that populations from low socio-economic backgrounds may achieve poorer behaviour change and health outcomes following interventions. If not carfully designed, interventions to increase the levels of physcial activity could worsen the already stark health inequalities in the UK.
+  However, interventions to promote physical activity can have unintended consequences: health promotion activities are often fail to reach those who need it the most. Socio-economically deprived groups are frequently underrepresented, evidence suggst that they may also achieve poorer behaviour change outcomes following interventions. If not carfully designed, interventions to increase the levels of physcial activity could worsen the already stark health inequalities in the UK.
   
-  Previous studies suggest that, [parkrun](http://www.parkrun.org.uk/), a grass-root running movement might offer some valuable lessons in this regard. parkrun seems to be particularly successful in encouraging participation in groups that are often underrepresented in health promotion activities ([Stevenson et al., 2014](https://academic.oup.com/jpubhealth/article/36/2/268/1548895)). In fact, parkrun participants report that accessibility and inclusivity are among the main factors that contributed to their initial attendance and sustained involvement ([Stevinson et al., 2017](https://onlinelibrary.wiley.com/doi/full/10.1111/1467-9566.12622))
+  [Parkrun](http://www.parkrun.org.uk/), a grass-roots running movement which originated in Bushy Park, London, has been widely praised as being successful in encouraging participation in groups which are particularly inactive and often underrepresented in health promotion activities ([Stevenson et al., 2014](https://academic.oup.com/jpubhealth/article/36/2/268/1548895)). Participants report that accessibility and inclusivity are among the main factors that contributed to their initial attendance and sustained involvement ([Stevinson et al., 2017](https://onlinelibrary.wiley.com/doi/full/10.1111/1467-9566.12622)). These early findings seems to suggest that the parkrun movement appears to hold huge potential from a public health perspective, to increase physical activiy, whithout increasing inequalities in health. 
+  
+  The present study aims to provide more insights into who has access to parkrun events in England, and who participates. It goes on to identify sites for future parkrun events to improve (equitable) public access.
   
 
 <br>
 <!-- blue text box -->
 <div class="alert alert-info"> <strong>What is Parkrun?</strong> 
+  Parkrun hosts five-kilometre running events in public parks at 9am every Saturday. The events are organized by volunteers and participation is free. As of October 2018, there were 570 parkrun locations in the UK, and 1.8 million registered runners. For more info, see [Wikipedia](https://en.wikipedia.org/wiki/Parkrun) </div>
   
-  Parkrun hosts five-kilometre running events in public parks on Saturday mornings. The events are organized by volunteers and participation is free. As of October 2018, there were 570 parkrun locations in the UK, and 1.8 million registered runners. For more info, see [Wikipedia](https://en.wikipedia.org/wiki/Parkrun) </div>
-  
-<br>
+  <br>
   
 #### Research question
   
   This study aims to investigate the (potential) geographic access to parkrun events and the actual utilization. Based on our findings, we provide policy recommendation for increasing both. More specifically, we assessed:
   
     
-  1. Who has access to parkrun events in England? We look at the relationship between the deprivation of an area and its geographic distance to the nearest parkrun event, to assess whether people in more deprived areas need to travel longer distances to participate. 
+  1. Who has access to parkrun events in England? We looked at the relationship between the deprivation of an area and its geographic distance to the nearest parkrun event, to assess whether people in more deprived areas need to travel longer distances to participate. 
   
-  2. Who participates in parkrun events? <mark>*-- Depending on data availability --*</mark> we will analyse participant data from parkrun events from 2018 to see from which areas the participants of parkrun events actually came: Are people from more deprived areas underrepreented? Do people from more affluent areas travel longer distances to attend running events? 
+  2. Who participates in parkrun events? We analysed participant data from parkrun events from 2018 to see from which areas participants of parkrun events actually came: Are people from more deprived areas underrepreented? Do people from more affluent areas travel longer distances to attend running events? 
   
-  3. We consider what we have learned from questions one and two and recommend locations for for starting new parkrun events, in order to either maximize geographic public access, or maximize utilization.
+  3. We considered what we have learned from questions one and two and provide some recommendations for locations for future parkrun events, in order to maximize (equitable) public access or utilization. We also identified parkrun events that were particularly successful in attracting people from more deprived areas, as potential case studies for future investigations.
 
   <br>
 
