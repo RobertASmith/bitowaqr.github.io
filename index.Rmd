@@ -20,7 +20,7 @@ output: html_document
 <center><b><font size="6" color="#0099ff"> - Work in Progress - </font> </b></center>
 <br>
 
-#### Motivation
+#### Motivation 
 
   Insufficient physical activity is one of the leading causes of disease and disability worldwide ([WHO, 2018](http://www.who.int/news-room/fact-sheets/detail/physical-activity)). For the UK, it has been estimated that one in six deaths is attributable to insufficient physical activity ([Lee et al. 2012](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3645500/)). Increasing the physical activity levels of the UK population has the potential to improve quality of life, reduce mortality rates and alleviate the strain on health and social care services. 
 
@@ -32,10 +32,8 @@ output: html_document
   
 
 <br>
-<!-- blue text box -->
 <div class="alert alert-info"> <strong>What is Parkrun?</strong> 
   Parkrun hosts five-kilometre running events in public parks at 9am every Saturday. The events are organized by volunteers and participation is free. As of October 2018, there were 570 parkrun locations in the UK, and 1.8 million registered runners. For more info, see [Wikipedia](https://en.wikipedia.org/wiki/Parkrun) </div>
-  
   <br>
   
 #### Research question
@@ -53,15 +51,12 @@ output: html_document
 
 
 ****
-  
-  
 
 <center> [CONTINUE TO THE **ANALYSIS**](access_analysis.html) </center>
 
-
 ****
   
-  <br>
+  
 
 
 
