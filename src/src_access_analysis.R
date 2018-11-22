@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ### ANALYSIS PART
 
 # load packages, data, and options
@@ -13,13 +12,11 @@ parkrun_marker = get_event_res(event = parkrun_marker,
                                poly_pop = poly_df,
                                pop_n = poly_df$pop,
                                objective = "dist^2 *pop")
-=======
 
 
 
 ### ANALYSIS PART
 # tbc
->>>>>>> parent of e998175... analysis html created
 options(scipen = 999)
 
 
@@ -70,16 +67,13 @@ lm_dist_depri = lm(poly_df$mn_dstn ~ poly_df$a)
 
 ma_dist_depri = 
   ggplot() +
-<<<<<<< HEAD
   theme_minimal() +
   geom_point(aes(x=poly_df$a,y=poly_df$mn_dstn), size = 0.5, alpha = 0.9,color="pink") +
   geom_smooth(aes(x=poly_df$a,y=poly_df$mn_dstn, col ="Model"),method = 'lm' , formula= 'y ~ x', se = F, size = 2) +
   geom_line(aes(x=steps1[-1],y=as.numeric(temp.group.means1), col = "Moving average"),size=2)+
-=======
   geom_point(aes(x=poly_df$a,y=poly_df$mn_dstn), size = 0.5, alpha = 0.9, color ="lightblue") +
   geom_smooth(aes(x=poly_df$a,y=poly_df$mn_dstn, col ="Model"),method = 'lm' , formula= 'y ~ x', se = F) +
   geom_line(aes(x=steps1[-1],y=as.numeric(temp.group.means1), col = "Moving average"))+
->>>>>>> parent of e998175... analysis html created
   theme(legend.position="bottom") +
   guides(col=guide_legend(title="")) +
   ylab("Distance to the nearest parkrun event location") +
@@ -94,16 +88,13 @@ lm_dist_density = lm(poly_df$mn_dstn ~ poly(log(poly_df$pp_dnst),4))
 
 ma_dist_density = 
   ggplot() +
-<<<<<<< HEAD
   theme_minimal() +
   geom_point(aes(x=log(poly_df$pp_dnst),y=poly_df$mn_dstn), size = 0.5, alpha = 0.9, color ="lightgreen") +
   geom_line(aes(x=log(poly_df$pp_dnst),y=predict(lm_dist_density),col ="Model"),size =2) +
   geom_line(aes(x=steps2[-1],y=as.numeric(temp.group.means2), col = "Moving average"), size = 2)+
-=======
   geom_point(aes(x=log(poly_df$pp_dnst),y=poly_df$mn_dstn), size = 0.5, alpha = 0.7, color ="lightgreen") +
   geom_line(aes(x=log(poly_df$pp_dnst),y=predict(lm_dist_density),col ="Model")) +
   geom_line(aes(x=steps2s[-1],y=as.numeric(temp.group.means2), col = "Moving average"))+
->>>>>>> parent of e998175... analysis html created
   theme(legend.position="bottom") +
   guides(col=guide_legend(title="")) +
   ylab("Distance to the nearest parkrun event location") +
