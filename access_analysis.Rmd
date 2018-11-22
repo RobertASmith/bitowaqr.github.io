@@ -17,101 +17,98 @@ options(scipen=9999)
 
 #### Who has access to parkrun events in England?
   
-<br>
-
-  We analysed data of `r dim(poly_df@data)[1]` LSOA in England. For each LSOA, we determined its distance to the nearest parkrun event. To be clear, for this analysis, we measured *access* as the (orthodromic) distance between the centroid of an LSOA area and the parkrun course that was closest to it. We did not consider the distances people actually travelled, which might be very different from
-  
-  Figure 1 shows the distribution of distances from LSOAs to the their nearest parkrun event. The median distance between LSOA centroids and a parkrun event was around 3.5 km (2.2 miles), but the distribution was heavily skewed, with a few outlier LSOA having distances over 40 km (25 miles) (maximum = 75 km (47 miles)).
-  
-```{r hist_dist, echo=FALSE, fig.height=3, fig.width=7, message=FALSE, warning=FALSE, fig.cap="Figure 1: Access to parkrun events (15 outliers excluded)"}
-hist_dist_per_lsoa
-```
-
   <br>
+
+  We analysed data of `r dim(poly_df@data)[1]` LSOA in England. For each LSOA, we determined its distance to the nearest parkrun event. To be clear, for this analysis, we measured *access* as the (orthodromic) distance between the centroid of an LSOA area and the parkrun course that was closest to it. We did not consider the distances people actually travelled, which might, of course, be very different.
+  
+  <br>
+  
   <!-- blue text box -->
 <div class="alert alert-info"> <strong>What is a LSOA?</strong>   
   A Lower Layer Super Output Area (LSOA) is a geographic area, which combines 4-6 'output areas' which, in turn, combine several postcode areas. LSOA have been automatically generated to have consistent population sizes of around 1,000. In our data set, the mean population per LSOA was `r round(mean(poly_df@data$pop))` with a standard deviation of `r round(sd(poly_df@data$pop))`. Consequently, the actual geographic size of LSOA varis a lot, depending on the population density. For more info, see [Office for National Statisics website ](https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeography) </div>
   
-****
-<br>
+  <br>
   
-  Figure 2 shows that the vast majority (Y%) of LSOA have a parkrun event within 5 km (X miles), and about 90% of areas (i.e. approximately 90% of the English population), has a parkrun event within 10 km ( X miles). However, this also means that around 10% of the population live in areas that is far away. It shpould be noted that the geographic distance is the shortest distance between two points. The actual distances people have to travel might, of course, vary considerably.
+  
+```{r hist_dist, echo=FALSE, fig.height=3, fig.width=8, message=FALSE, warning=FALSE, fig.cap="Figure 1: Access to parkrun events (15 outliers excluded)"}
+hist_dist_per_lsoa
+```
+Figure 1 shows the distribution of distances from LSOAs to the nearest parkrun event. The median distance between LSOA centroids and a parkrun event was around 3.5 km (2.2 miles), but the distribution was heavily skewed, with a few outlier LSOA having distances over 40 km (25 miles) (maximum = 75 km (47 miles)).
+  <br>
 
-```{r cum_dist, echo=FALSE, fig.height=3, fig.width=5, message=FALSE, warning=FALSE, fig.cap="Figure 2: Cumulative distribution of distances to the nearest parkrun event (49 outliers omitted)"}
+****
+  <br><br>
+  
+```{r cum_dist, echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, fig.cap="Figure 2: Cumulative distribution of distances to the nearest parkrun event (49 outliers omitted)"}
 cumsum_dist_per_lsoa
 ```
 
+Figure 2 shows that the vast majority of LSOA have a parkrun event within 5 km (3.1 miles), and about 90% of LSOA (i.e. approximately 90% of the population), have a parkrun event within 10 km (6.2 miles). However, this also means that around 10% of the population live in areas that is far away. It shpould be noted that the geographic distance is the shortest distance between two points. The actual distances people have to travel might, of course, vary considerably.
+
 
 ****
-<br>
+  <br><br>
 
-Served population per event:
-There are currently `r length(parkrun_marker@data[,1])` parkrun sites in England. On average, a parkrun event serves `r round(mean(parkrun_marker$srvd_lsoa))` LSOAs (SD=`r round(sd(parkrun_marker$srvd_lsoa))`), and  `r formatC(round(mean(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)` people  (SD=`r formatC(round(sd(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)`). There are again some extreme outliers. [Canon Hill](http://www.parkrun.org.uk/cannon-hill/course/), for example, a park in the south of Birmingham, hosts events that are nearest to `r parkrun_marker@data[74,"srvd_lsoa"]` LSOAs and `r formatC(parkrun_marker@data[74,"srvd_pop"], big.mark=",")` people. 
-
-```{r event_pop, echo=FALSE, fig.height=3, fig.width=5, message=FALSE, warning=FALSE, fig.cap="Figure 3: Total population for which a particulat parkrun event is the nearest"}
+```{r event_pop, echo=FALSE, fig.height=3, fig.width=8, message=FALSE, warning=FALSE, fig.cap="Figure 3: Total population for which a particulat parkrun event is the nearest"}
 hist_srvd_pop_per_event
 ```
 
+Served population per event:
+There are currently `r length(parkrun_marker@data[,1])` parkrun sites in England. On average, a parkrun event serves `r round(mean(parkrun_marker$srvd_lsoa))` LSOAs (SD=`r round(sd(parkrun_marker$srvd_lsoa))`), and  `r formatC(round(mean(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)` people  (SD=`r formatC(round(sd(parkrun_marker$srvd_pop)),big.mark=",",digits = 6)`). There are again some extreme outliers. [Canon Hill](http://www.parkrun.org.uk/cannon-hill/course/), for example, a park in the south of Birmingham, hosts events that are nearest to `r parkrun_marker@data[74,"srvd_lsoa"]` LSOAs and `r formatC(parkrun_marker@data[74,"srvd_pop"], big.mark=",",digits=7)` people. 
+
 ****
-<br>
-
-
-Figure 4 shows the relationship between the deprivation scores and distances to the nearest parkurn event. Each point represent one LSOA, i.e. approsimately 1,000 people. It seems, there is very little correlation and, if any, then a negative one. That means, more deprived areas have, in fact, shorter distances to parkrun events. 
-
+  <br><br>
 
 ```{r dist_depri, echo=FALSE, fig.height=5, fig.width=8, message=FALSE, warning=FALSE,fig.cap="Figure 4: Association between deprivation and access to parkrun (22 outliers omitted)"}
 ma_dist_depri
 ```
 
+Figure 4 shows the relationship between the [deprivation scores](https://www.gov.uk/government/statistics/english-indices-of-deprivation-2015) and distances to the nearest parkurn event. Each point represent one LSOA, i.e. approximately 1,000 people. The association between deprivation and distance is very low ($R^2$=`r round(summary(lm_dist_depri)$r.squared,2)`) and, if there is any relationship between the two variables, it is negative (beta = `r round(summary(lm_dist_depri)$coefficients[2],2)`). That means, the more deprived, the shorter te distance to a parkrun event. 
+
 
 ****
-<br>
+  <br><br>
 
-
-  The (most probably) underlying explanation is that deprived areas are mostly located in urban areas with high population densities (left figure below). Similarly, parkrun events also tend to cluster around cities (right figure below). 
-  
 ```{r dist_density_density_depri, echo=FALSE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, fig.cap="Figure 5: Associations between deprivation and population density, and between population density and distance to the nearest parkrun event"}
  plot_grid( ma_depri_density,ma_dist_density, nrow=1)
 ```
 
+The most probable explanation is that deprived LSOA are located in urban areas with high population densities (left figure), while parkrun events also cluster around cities (right figure). 
+  
 
 ****
-<br>
+  <br><br>
 
 
-Interestingly, if we take interaction between density and deprivation into account, the effect on deprivation differs between rural and urban areas: We plotted predicted values for populations living in the 10% least densly, 10% high dense, and 50% (median) dense areas (see figure 5). The results seem to suggest that dperived people in rural areas seem to have better access to parkrun events than people frmo less deprived areas. In medium densely populated areas, this effects is much less prominent, and in high density areas, the effect seem to reverse, and a slight positive effect could be observed. However, it should be noted that the observed effects were small and that the adding the deprivaiton score into the model did barely improve the model fit (see table 1 below). 
-
-  
-```{r model_preds, echo=FALSE, fig.height=4, fig.width=6, fig.cap="Figure 6: Association between deprivation and distance to the nearest parkrun event for different levels of population density - See Model 3 below"}
+```{r model_preds, echo=FALSE, fig.height=4, fig.width=6, fig.cap="Figure 6: Association between deprivation and distance to the nearest parkrun event for different levels of population density - See 'Model 3' below"}
 model_est_a_density_dist
 ```
+  Interestingly, if we take the interaction between density and deprivation into account, the effect of deprivation on distance differs between rural and urban areas: We plotted predicted values for populations living in the 10% least densly, 10% high dense, and 50% (median) dense areas (see figure 5). The results seem to suggest that dperived people in rural areas seem to have better access to parkrun events than people frmo less deprived areas. In medium densely populated areas, this effects is much less prominent, and in high density areas, the effect seem to reverse, and a slight positive effect could be observed. However, it should be noted that the observed effects were small and that the adding the deprivaiton score into the model did barely improve the model fit (see table 1). 
 
-<br>
+  <br><br>
 
-  __Regression models__
+  __Table 1: Regression models__
 ```{r model_res,echo=FALSE, message=FALSE, warning=FALSE,results='asis'}
-table = (mtable("Model 1"=lm_dist_depri,
+table = memisc::mtable("Model 1"=lm_dist_depri,
                  "Model 2"=lm_dist_density,
                  "Model 3"=lm_dist_depri_dens,
                  coef.style= "stat",
-                 summary.stats=c("R-squared","N")))
-table <- relabel(table,"a"="Deprivation Score ",gsub=F)
-table <- relabel(table,"a "="Deprivation Score ",gsub=T)
+                 summary.stats=c("R-squared","N"))
+table = relabel(table,"a"="Deprivation Score ",gsub=F)
+table = relabel(table,"a "="Deprivation Score ",gsub=T)
 table = relabel(table,"pp_dnst" = "Population density",gsub=T)
-# table
 format(table, target="HTML")
+#table
 ```
 
 ****
-<br>
+  <br><br>
 
 
 
 #### Conclusion
 
-  Contrary to our initial expectations, we found that people living in deprived areas have better access to parkrun events than people living in affluent areas. This effects appears to be the result of the aggregation of deprived areas within urban areas, which seem to also attract parkrun events.
-  
-  The clustering of parkrun events around cities seem to cause a strong rural-urban gradient: People in rural areas have much farther distances to parkrun events than people living in urban areas. This is particularly unfortunate, since people in rural areas tend to have lower PA that people living in cities - Exactly the group of people who would most benefit from participating in weekly running events!
+  Contrary to our initial expectations, we found that people living in deprived areas have better geographic access to parkrun events than people living in more affluent areas. This appears to be the result of the aggregation of deprived areas within urban areas, which seem to also attract parkrun events. In fact, the clustering of parkrun events around cities seem to create a strong rural-urban gradient: People in rural areas have much farther distances to parkrun events than people living in urban areas. 
   
   
 
@@ -122,10 +119,3 @@ format(table, target="HTML")
 <center> [EXPLORE THE **MAP**](access_map.html) </center>
 
 ****
-  
-
-  This website aims to provide a quick and informal overview of the findings. If you want to have a closer look at the methodology behind our analysis, the source code is available, see: [data&code](dc.html).
-
-
-
-

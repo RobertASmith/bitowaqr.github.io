@@ -63,7 +63,7 @@ temp.cut = cut(poly_df$a,steps1)
 temp.group.means1 = by(data=poly_df$mn_dstn,INDICES = temp.cut,function(x) mean(x,na.rm=T))
 
 
-lm_dist_depri = lm(poly_df$mn_dstn ~ poly_df$a)
+lm_dist_depri = lm(mn_dstn ~ a, data=poly_df)
 
 ma_dist_depri = 
   ggplot() +
@@ -84,7 +84,7 @@ steps2 = seq(min(log(poly_df$pp_dnst)),max(log(poly_df$pp_dnst)),length.out = 10
 temp.cut = cut(log(poly_df$pp_dnst),steps2)
 temp.group.means2 = by(data=(poly_df$mn_dstn),INDICES = temp.cut,function(x) mean(x,na.rm=T))
 
-lm_dist_density = lm(poly_df$mn_dstn ~ poly(log(poly_df$pp_dnst),4))
+lm_dist_density = lm(mn_dstn ~ poly(log(pp_dnst),4),data=poly_df)
 
 ma_dist_density = 
   ggplot() +
@@ -107,7 +107,7 @@ steps3 = seq(min(log(poly_df$pp_dnst)),max(log(poly_df$pp_dnst)),length.out = 10
 temp.cut = cut(log(poly_df$pp_dnst),steps3)
 temp.group.means3 = by(data=(poly_df$a),INDICES = temp.cut,function(x) mean(x,na.rm=T))
 
-lm_a_density = lm(poly_df$a ~ poly(log(poly_df$pp_dnst),2))
+lm_a_density = lm(a ~ poly(log(pp_dnst),2),data=poly_df)
 
 ma_depri_density = 
   ggplot() +
