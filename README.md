@@ -1,2 +1,2 @@
 # bitowaqr.github.io
-Testing a website
+Testing the website
