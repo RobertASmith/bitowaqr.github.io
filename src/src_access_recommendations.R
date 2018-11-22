@@ -198,7 +198,8 @@ time1 = Sys.time()
       hideGroup("Show baseline distances") %>%
       hideGroup("New candidates (first)") %>%
       hideGroup("New candidates (consecutive)") %>%
-      hideGroup("Parks considered") 
+      hideGroup("Parks considered") %>%
+      hideGroup("Show legend") 
     
 
   ## Save map as stand-alone html widget

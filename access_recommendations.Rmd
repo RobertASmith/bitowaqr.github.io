@@ -21,7 +21,7 @@ source("./src/src_access_recommendations.R")
   * `Candidate parks`: Shows all 2,827 parks that were considered.
   * Recommendations are ranked by impact, and the sizes of the circles indicate the realtive impact on the overall objective function.
   
-  <br><br>
+  <br>
   
   
 <!-- blue text box -->
@@ -45,7 +45,7 @@ map_distance_squared
 
 #### Methods 
 
-  We used a locational allocation analysis to find the optimal site for starting a new parkrun event, in order to minimize population-weighted total impedance (see objective function above). Impedance was assumed to increase quadratically with distance (i.e. overall access could in turn be seen as the inverse squared distance). The search space was restricted to public parks, with an area of 0.05 km$^2$ or more, that were registered in the OS Open Greenspace database (see [see data & code](data_code.html)). For each candidate park, we evaluated the impact of starting a new event on total impedance. To assess cumulative effects, we repeated the analysis, each time adding the optimal candidate park to the list of established parkrun sites.
+  We used a locational allocation analysis to find the optimal site for starting a new parkrun event, in order to minimize population-weighted total impedance (see objective function above). Impedance was assumed to increase quadratically with distance (i.e. overall access could in turn be seen as the inverse squared distance). The search space was restricted to public parks, with an area of 0.05 km$^2$ or more, that were registered in the OS Open Greenspace database (see [data & code](data_code.html)). For each candidate park, we evaluated the impact of starting a new event on total impedance. To assess cumulative effects, we repeated the analysis, each time adding the optimal candidate park to the list of established parkrun sites.
   
   Put simply, our model consisted of a loop with four steps: 1. we added a candidate park to the list of parkrun events. 2. for each LSOA, we then determined the distance to the nearest parkrun event (including the candidate park). 3. we evaluated the change in the sum of population-weighted squared distances over all LSOA. 4. the optimal site for a new parkrun event was then the candidate park with the lowest sum.
   

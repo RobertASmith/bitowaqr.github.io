@@ -94,7 +94,7 @@ ma_dist_density =
   geom_line(aes(x=steps2[-1],y=as.numeric(temp.group.means2), col = "Moving average"), size = 2)+
   geom_point(aes(x=log(poly_df$pp_dnst),y=poly_df$mn_dstn), size = 0.5, alpha = 0.7, color ="lightgreen") +
   geom_line(aes(x=log(poly_df$pp_dnst),y=predict(lm_dist_density),col ="Model")) +
-  geom_line(aes(x=steps2s[-1],y=as.numeric(temp.group.means2), col = "Moving average"))+
+  geom_line(aes(x=steps2[-1],y=as.numeric(temp.group.means2), col = "Moving average"))+
   theme(legend.position="bottom") +
   guides(col=guide_legend(title="")) +
   ylab("Distance to the nearest parkrun event location") +
