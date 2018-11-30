@@ -19,7 +19,7 @@ source("./src/src_access_recommendations.R")
   * `New candidates (first)`: Top 50 candidate parks to consider, if *a single new parkrun event* is to be started. 
   * `New candidates (consecutive)`: Candidate parks for starting *25 consecutive events*, taking into account the effects new events have on the effectiveness of subsequent events. 
   * `Candidate parks`: Shows all 2,827 parks that were considered.
-  * Recommendations are ranked by impact, and the sizes of the circles indicate the realtive impact on the overall objective function.
+  * Recommendations are ranked by impact, with the size of the circles indicating the realative impact on the overall objective function.
   
   <br>
   
